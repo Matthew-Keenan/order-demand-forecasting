@@ -8,9 +8,6 @@ from sklearn.metrics import mean_squared_error, r2_score
 # Reads csv file into pandas dataframe
 postData = pd.read_csv("Daily_Demand_Forecasting_Orders.csv", sep=";")
 
-# Replaces 'postData' with only the columns wanted
-postData = postData[["Week of Month (1-5)", "Day (2-6)", "Non-urgent order", "Urgent order", "Order type A", "Order type B", "Order type C", "Fiscal sector orders", "Traffic controller sector orders", "Banking orders (1)", "Banking orders (2)", "Banking orders (3)", "Total orders"]]
-
 # Sets variable for the data column being predicted
 value_to_predict = "Total orders"
 
