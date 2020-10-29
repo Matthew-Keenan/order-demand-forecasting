@@ -31,27 +31,20 @@ y = np.array(postData[value_to_predict])
 # Separates 10% of each dataset to be used for testing
 x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
 
-highest_R2 = 0
+# Initialize 'linear' variable to be linear regression object, trains 'linear' with the two training sets
+linear = linear_model.LinearRegression()
+linear.fit(x_train, y_train)
 
-for i in range(50):
-    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
+# Forms predictions based on testing set
+y_predict = linear.predict(x_test)
 
-    # Initialize 'linear' variable to be linear regression model, then takes in training data
-    linear = linear_model.LinearRegression()
-    linear.fit(x_train, y_train)
-
-    y_predict = linear.predict(x_test)
-    R2 = r2_score(y_test, y_predict)
-    if R2 > highest_R2:
-        highest_R2 = R2
-        with open("ordermodel.pickle", "wb") as f:
-            pickle.dump(linear, f)
-
-pickle_info = open("ordermodel.pickle", "rb")
-linear = pickle.load(pickle_info)
-
+# Calculates the R2 Score and MSE given y_test values and y_predict values
 R2 = r2_score(y_test, y_predict)
 MSE = mean_squared_error(y_test, y_predict)
 
+# Neatly displays data found
+print(f"                R2 Value: {round(R2, 6)}")
+print(f"Mean Squared Error (MSE): {round(MSE, 6)}")
+print()
 for i in range(len(y_predict) - 1):
-    print(f"Predicted Orders: {y_predict[i]}    ", f"Actual Orders: {y_test[i]}")
+    print(f"Predicted Orders: {round(y_predict[i], 2)} \t Actual Given Orders: {round(y_test[i], 2)}" )
