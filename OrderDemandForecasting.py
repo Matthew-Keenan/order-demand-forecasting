@@ -4,7 +4,6 @@ import pandas as pd
 import sklearn
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error, r2_score
-import pickle
 
 # Reads csv file into pandas dataframe
 postData = pd.read_csv("Daily_Demand_Forecasting_Orders.csv", sep=";")
